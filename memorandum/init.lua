@@ -77,6 +77,9 @@ minetest.register_node("memorandum:letter_empty", {
 		fields.signed = minetest.formspec_escape(fields.signed) or ""
 		--[[print((sender:get_player_name() or "").." wrote \""..fields.text..
 				"\" to paper at "..minetest.pos_to_string(pos))]]
+		minetest.log("action", (sender:get_player_name() or "").." wrote \""..
+			fields.text.."\" signed as \""..fields.signed.."\" to paper at "..
+			minetest.pos_to_string(pos))
 		local fdir = minetest.get_node(pos).param2
 		if fields.text ~= "" then
 			minetest.add_node(pos, {name="memorandum:letter_written", param2=fdir})
@@ -184,6 +187,9 @@ minetest.register_node("memorandum:letter_written", {
 			fields.signed = minetest.formspec_escape(fields.signed) or ""
 			--[[print((sender:get_player_name() or "").." wrote \""..fields.text..
 				"\" to paper at "..minetest.pos_to_string(pos))]]
+			minetest.log("action", (sender:get_player_name() or "").." wrote \""..
+				fields.text.."\" signed as \""..fields.signed.."\" to paper at "..
+				minetest.pos_to_string(pos))
 			local fdir = minetest.get_node(pos).param2
 			if fields.text == "" then
 				minetest.add_node(pos, {name="memorandum:letter_empty", param2=fdir})
